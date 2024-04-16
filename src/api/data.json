@@ -1,17 +1,29 @@
 {
-    "accordion": {
-      "type": "accordion",
-      "content": [
-        {
-          "title": "Section 1",
-          "body": "This is the content for section 1."
-        },
-        {
-          "title": "Section 2",
-          "body": "This is the content for section 2."
-        }
-      ]
-    },
+  "accordion": {
+    "type": "accordion",
+    "content": [
+      {
+        "title": "Category 1",
+        "body": "Answer 1"
+      },
+      {
+        "title": "Category 2",
+        "body": "Answer 2"
+      },
+      {
+        "title": "Category 3",
+        "body": "Answer 3"
+      },
+      {
+        "title": "Category 4",
+        "body": "Answer 4"
+      },
+      {
+        "title": "Category 5",
+        "body": "Answer 5"
+      }
+    ]
+  },
     "externalUrl": {
       "type": "externalUrl",
       "url": "https://example.com"
