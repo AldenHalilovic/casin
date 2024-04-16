@@ -1,0 +1,42 @@
+{
+    "accordion": {
+      "type": "accordion",
+      "content": [
+        {
+          "title": "Section 1",
+          "body": "This is the content for section 1."
+        },
+        {
+          "title": "Section 2",
+          "body": "This is the content for section 2."
+        }
+      ]
+    },
+    "externalUrl": {
+      "type": "externalUrl",
+      "url": "https://example.com"
+    },
+    "contact": {
+      "type": "contact",
+      "fields": ["name", "email", "message"]
+    },
+    "grid": {
+      "type": "grid",
+      "items": [
+        {
+          "id": 1,
+          "name": "Item 1",
+          "value": "Value 1"
+        },
+        {
+          "id": 2,
+          "name": "Item 2",
+          "value": "Value 2"
+        }
+      ]
+    },
+    "simple": {
+      "type": "simple",
+      "html": "<p>This is some HTML content.</p>"
+    }
+  }
