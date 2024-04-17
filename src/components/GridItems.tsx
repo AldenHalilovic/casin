@@ -1,11 +1,11 @@
 // GridItems.tsx
-import { Grid, Paper, Typography } from '@mui/material';
+import { Grid, Paper, Typography } from "@mui/material";
 
 export default function GridItems() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={5} sm={3}>
-        <Paper elevation={3} style={{ padding: '1rem' }}>
+        <Paper elevation={3} style={{ padding: "1rem" }}>
           <Typography variant="h5" gutterBottom>
             Section 1
           </Typography>
@@ -15,7 +15,7 @@ export default function GridItems() {
         </Paper>
       </Grid>
       <Grid item xs={5} sm={3}>
-        <Paper elevation={3} style={{ padding: '1rem' }}>
+        <Paper elevation={3} style={{ padding: "1rem" }}>
           <Typography variant="h5" gutterBottom>
             Section 2
           </Typography>

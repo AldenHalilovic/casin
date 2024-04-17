@@ -1,10 +1,11 @@
-// externalUrl/index.tsx
 import React, { useEffect } from 'react';
 
 const ExternalUrlPage = ({ data }: { data: any }) => {
     useEffect(() => {
-        window.location = data.url;
-    }, [data.url]);
+        if (data && data.url) {
+            window.location = data.url;
+        }
+    }, [data]);
 
     return null;
 };

@@ -1,4 +1,4 @@
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box } from "@mui/material";
 
 export default function LiveCasino() {
   return (
@@ -10,17 +10,23 @@ export default function LiveCasino() {
         alignItems="center"
         height="100vh"
       >
-        <Typography variant="h2" align="center" gutterBottom >
+        <Typography
+          variant="h2"
+          align="center"
+          gutterBottom
+          sx={{ color: "#ffffff" }}
+        >
           Live Casino Page Coming Soon
         </Typography>
-        <Typography 
-          variant="h6" 
-          align="center" 
-          sx={{ 
-            borderLeft: '2px solid', 
-            borderRight: '2px solid', 
-            paddingLeft: '1rem', 
-            paddingRight: '1rem' 
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{
+            borderLeft: "2px solid",
+            borderRight: "2px solid",
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+            color: "#ffffff",
           }}
         >
           Stay tuned, we are working on it

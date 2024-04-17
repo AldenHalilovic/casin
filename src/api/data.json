@@ -1,38 +1,37 @@
 {
-  "accordion": {
-    "type": "accordion",
-    "content": [
-      {
-        "title": "Category 1",
-        "body": "Answer 1"
-      },
-      {
-        "title": "Category 2",
-        "body": "Answer 2"
-      },
-      {
-        "title": "Category 3",
-        "body": "Answer 3"
-      },
-      {
-        "title": "Category 4",
-        "body": "Answer 4"
-      },
-      {
-        "title": "Category 5",
-        "body": "Answer 5"
-      }
-    ]
-  },
-    "externalUrl": {
-      "type": "externalUrl",
-      "url": "https://example.com"
+  "pages": [
+    {
+      "id": "1",
+      "title": "Page 1",
+      "type": "accordion",
+      "content": [
+        {
+          "title": "Catagory 1",
+          "body": "Answer 1"
+        },
+        {
+          "title": "Catagory 2",
+          "body": "Answer 2"
+        },
+        {
+          "title": "Catagory 3",
+          "body": "Answer 3"
+        },
+        {
+          "title": "Catagory 4",
+          "body": "Answer 4"
+        }
+      ]
     },
-    "contact": {
+    {
+      "id": "2",
+      "title": "Page 2",
       "type": "contact",
       "fields": ["name", "email", "message"]
     },
-    "grid": {
+    {
+      "id": "3",
+      "title": "Page 3",
       "type": "grid",
       "items": [
         {
@@ -47,8 +46,11 @@
         }
       ]
     },
-    "simple": {
+    {
+      "id": "4",
+      "title": "Page 4",
       "type": "simple",
       "html": "<p>This is some HTML content.</p>"
     }
-  }
+  ]
+}

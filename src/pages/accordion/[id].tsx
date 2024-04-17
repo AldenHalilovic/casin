@@ -6,8 +6,6 @@ export default function AccordionPage() {
   const router = useRouter();
   const { id } = router.query;
 
-  // Fetch the data for the page with this id
-  // This is just a placeholder and should be replaced with your actual data fetching logic
   const data = {
     content: [
       { title: `Item 1 for page ${id}`, body: 'This is the body for item 1.' },
