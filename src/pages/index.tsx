@@ -3,9 +3,9 @@ import Sidebar from "../components/Sidebar";
 import LoginModal from "../components/LoginModal";
 import RegisterModal from "../components/RegisterModal";
 import HeroSection from "../components/HeroSection";
-import GridItems from "../components/GridItems";
 import { Box } from "@mui/material";
-import Footer from "@/components/Footer";
+import SponsorComponent from "@/components/SponsorComponent";
+import DataTable from "@/components/DataTable";
 
 export default function HomePage() {
   const [loginOpen, setLoginOpen] = useState(false);
@@ -40,7 +40,11 @@ export default function HomePage() {
         handleDrawerToggle={toggleDrawer}
       />
       <HeroSection sidebarOpen={sidebarOpen} />
-      <GridItems />
+      <Box padding="30px">
+        <SponsorComponent />
+        <DataTable />
+      </Box>
+
       <LoginModal open={loginOpen} handleClose={handleLoginClose} />
       <RegisterModal open={registerOpen} handleClose={handleRegisterClose} />
     </Box>

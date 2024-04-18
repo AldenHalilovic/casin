@@ -1,8 +1,24 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
+import { pages } from "../../api/data";
+
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
+  address: string;
+  [key: string]: string;
+}
+
+interface Field {
+  name: keyof FormState;
+  label: string;
+}
+
+const contactPage = pages.find((page) => page.type === "contact");
 
 const ContactPage = () => {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
     message: "",
@@ -37,62 +53,32 @@ const ContactPage = () => {
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", width: "70%" }}
       >
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            name="name"
-            label="Name"
-            variant="outlined"
-            value={form.name}
-            onChange={handleChange}
-            InputProps={{ style: { color: "#fff" } }}
-            InputLabelProps={{ style: { color: "#fff" } }}
-          />
-        </Box>
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            name="email"
-            label="Email"
-            variant="outlined"
-            value={form.email}
-            onChange={handleChange}
-            InputProps={{ style: { color: "#fff" } }}
-            InputLabelProps={{ style: { color: "#fff" } }}
-            sx={{ width: "500px" }}
-          />
-        </Box>
-        <Box marginBottom={2}>
-          <TextField
-            fullWidth
-            name="address"
-            label="Address"
-            variant="outlined"
-            value={form.address}
-            onChange={handleChange}
-            InputProps={{ style: { color: "#fff" } }}
-            InputLabelProps={{ style: { color: "#fff" } }}
-          />
-        </Box>
-        <Box marginBottom={2}>
-          <TextField
-            name="message"
-            label="Message"
-            variant="outlined"
-            value={form.message}
-            onChange={handleChange}
-            fullWidth
-            multiline
-            InputProps={{ style: { color: "#fff" } }}
-            InputLabelProps={{ style: { color: "#fff" } }}
-          />
-        </Box>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          sx={{ width: "500px" }}
-        >
+        {contactPage &&
+          contactPage.fields?.map((field, index) => (
+            <Box marginBottom={2} key={index}>
+              <TextField
+                fullWidth
+                name={field.name}
+                label={field.label}
+                variant="outlined"
+                value={form[field.name]}
+                multiline={field.multiline}
+                rows={field.rows}
+                onChange={handleChange}
+                InputProps={{
+                  style: { color: "#fff" },
+                  sx: {
+                    borderColor: "white",
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderRadius: "10px",
+                  },
+                }}
+                InputLabelProps={{ style: { color: "#fff" } }}
+              />
+            </Box>
+          ))}
+        <Button variant="contained" type="submit">
           Submit
         </Button>
       </form>

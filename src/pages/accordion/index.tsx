@@ -1,19 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import data from "../../api/data.json";
+import { pages } from "../../api/data";
 
-const accordionData = data.pages.find((page: any) => page.type === "accordion");
+const accordionData = pages.find((page: any) => page.type === "accordion");
 
-const AccordionPage = ({ data }: { data: any }) => {
-  const [openIndexes, setOpenIndexes] = useState<boolean[]>(
-    new Array(data.content.length).fill(false)
-  );
+const AccordionPage = () => {
+  const [data, setData] = useState([]);
+  const [openIndexes, setOpenIndexes] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    fetch("/api/server")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((pages) => {
+        const accordionData = pages.find(
+          (page: any) => page.type === "accordion"
+        );
+        if (accordionData && accordionData.items) {
+          setData(accordionData.items);
+          setOpenIndexes(
+            new Array<boolean>(accordionData.items.length).fill(false)
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   const handleClick = (index: number) => {
-    const newOpenIndexes = [...openIndexes];
-    newOpenIndexes[index] = !newOpenIndexes[index];
-    setOpenIndexes(newOpenIndexes);
+    setOpenIndexes((prevIndexes) =>
+      prevIndexes.map((isOpen, idx) => (idx === index ? !isOpen : isOpen))
+    );
   };
 
   return (
@@ -25,6 +48,7 @@ const AccordionPage = ({ data }: { data: any }) => {
         justifyContent: "center",
         maxHeight: "100vh",
         overflow: "auto",
+        padding: "25px",
       }}
     >
       <Typography
@@ -36,62 +60,54 @@ const AccordionPage = ({ data }: { data: any }) => {
       >
         FAQ
       </Typography>
-      {data &&
-        data.content &&
-        data.content.map((section: any, index: number) => (
+      {data.map((section: any, index: number) => (
+        <Box
+          key={index}
+          sx={{
+            margin: "1em 0",
+            width: "70%",
+            bgcolor: "#2d3a42",
+            boxShadow: "none",
+            borderRadius: "10px",
+            borderWidth: 1,
+            borderStyle: "solid",
+          }}
+        >
           <Box
-            key={index}
             sx={{
-              margin: "1em 0",
-              width: "70%",
-              bgcolor: "#95bcd5",
-              boxShadow: "none",
-              borderRadius: "10px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "1em",
+              cursor: "pointer",
             }}
+            onClick={() => handleClick(index)}
           >
+            <Typography sx={{ fontWeight: "bold" }}>
+              {section.question}
+            </Typography>
+            <ExpandMoreIcon
+              sx={{
+                transform: openIndexes[index]
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+                transition: "transform 0.3s",
+              }}
+            />
+          </Box>
+          {openIndexes[index] && (
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
                 padding: "1em",
-                cursor: "pointer",
               }}
-              onClick={() => handleClick(index)}
             >
-              <Typography sx={{ fontWeight: "bold" }}>
-                {section.title}
-              </Typography>
-              <ExpandMoreIcon
-                sx={{
-                  transform: openIndexes[index]
-                    ? "rotate(180deg)"
-                    : "rotate(0deg)",
-                  transition: "transform 0.3s",
-                }}
-              />
+              <Typography>{section.body}</Typography>
             </Box>
-            {openIndexes[index] && (
-              <Box
-                sx={{
-                  padding: "1em",
-                  borderBottomLeftRadius: "10px",
-                  borderBottomRightRadius: "10px",
-                }}
-              >
-                <Typography>{section.body}</Typography>
-              </Box>
-            )}
-          </Box>
-        ))}
+          )}
+        </Box>
+      ))}
     </Box>
   );
 };
 
-export default function Page() {
-  return (
-    <>
-      <AccordionPage data={accordionData} />;
-    </>
-  );
-}
+export default AccordionPage;

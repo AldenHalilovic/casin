@@ -1,28 +1,41 @@
-import { Box, List, ListItem, ListItemText, Typography } from '@mui/material';
-import Link from 'next/link';
+import { Box, Typography } from "@mui/material";
+import { pages } from "../../api/data";
 
-type SimplePageProps = {
-  data: {
-    id: string;
-    title: string;
-  }[];
-};
-
-const SimplePage: React.FC<SimplePageProps> = ({ data }) => {
+export default function SimplePage({ html }: { html: string }) {
   return (
-    <Box>
-      <Typography variant="h4" component="h1" gutterBottom>
-        Simple Pages
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      minHeight="80vh"
+    >
+      <Typography variant="h4" gutterBottom>
+        Simple
       </Typography>
-      <List>
-        {data && data.map((item) => (
-          <ListItem button component={Link} href={`/simple/${item.id}`} key={item.id}>
-            <ListItemText primary={item.title} />
-          </ListItem>
-        ))}
-      </List>
+      <Box
+        display="flex"
+        justifyContent="center"
+        flexDirection="column"
+        alignItems="center"
+        width="100%"
+      >
+        <Box display="flex" flexDirection="column" alignItems="baseline">
+          <Typography variant="h6" gutterBottom>
+            Heading
+          </Typography>
+          {html && <Box dangerouslySetInnerHTML={{ __html: html }} />}
+        </Box>
+      </Box>
     </Box>
   );
-};
+}
 
-export default SimplePage;
+export async function getServerSideProps() {
+  const page = pages.find((page) => page.id === "3");
+  const html = page ? page.html : null;
+
+  return {
+    props: { html },
+  };
+}

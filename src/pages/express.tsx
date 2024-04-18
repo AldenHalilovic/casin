@@ -4,7 +4,7 @@ import ExternalUrlPage from "../pages/externalurl/index";
 import ContactPage from "../pages/contact/index";
 import GridPage from "../pages/grid/index";
 import SimplePage from "../pages/simple/index";
-import data from "../api/data.json";
+import data from "../api/data";
 
 const ExpressPage = ({ pageData }: { pageData: any }) => {
   const router = useRouter();

@@ -1,22 +1,49 @@
 import React from "react";
-import { Grid, Paper } from "@mui/material";
-import data from "../api/data.json";
+import { Grid, Paper, Typography } from "@mui/material";
 
 const GridPage = () => {
-  const gridData = data.pages.find((page: any) => page.id === "3")?.items || [];
-
   return (
-    <Grid container spacing={2}>
-      {gridData.map((item: any, index: number) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
+    <>
+      <Typography variant="h4" align="center">
+        Promotion
+      </Typography>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={12} sm={6} md={4.5}>
           <Paper elevation={3}>
-            <div>
-              {item.name}: {item.value}
-            </div>
+            <Grid container>
+              <Grid item xs={15}>
+                <img src="Nature.jpg" alt="Nature" style={{ width: "100%" }} />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h5">Nature</Typography>
+                <Typography variant="body2" align="left">
+                  Nature is Good
+                </Typography>
+              </Grid>
+            </Grid>
           </Paper>
         </Grid>
-      ))}
-    </Grid>
+        <Grid item xs={12} sm={5} md={4}>
+          <Paper elevation={3}>
+            <Grid container>
+              <Grid item xs={15}>
+                <img
+                  src="Flowers.jpg"
+                  alt="Flowers"
+                  style={{ width: "100%" }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="h5">Flowers</Typography>
+                <Typography variant="body2" align="left">
+                  i'm allergic to it
+                </Typography>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

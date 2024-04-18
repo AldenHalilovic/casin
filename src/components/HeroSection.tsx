@@ -10,13 +10,13 @@ export default function HeroSection({ sidebarOpen }: { sidebarOpen: boolean }) {
       alignItems="flex-start"
       height="100%"
       padding="2rem"
-      marginLeft={sidebarOpen ? "360px" : "0"} // Conditional margin
-      ml={2} // Add some left margin
+      marginLeft={sidebarOpen ? "360px" : "0"}
+      ml={10}
     >
-      <Typography variant="h4" align="left" color="black" gutterBottom>
+      <Typography variant="h5" align="left" color="white" gutterBottom>
         Welcome back user
       </Typography>
-      <Typography variant="body1" align="left" color="black">
+      <Typography variant="body1" align="left" color="white">
         Your VIP Progress
       </Typography>
       <Box width="70%" mt={2}>

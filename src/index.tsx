@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import Sidebar from '../components/Sidebar';
-import LoginModal from '../components/LoginModal';
-import RegisterModal from '../components/RegisterModal';
-import HeroSection from '../components/HeroSection';
-import GridItems from '../components/GridItems';
+import { useState } from "react";
+import Sidebar from "./components/Sidebar";
+import LoginModal from "./components/LoginModal";
+import RegisterModal from "./components/RegisterModal";
+import HeroSection from "./components/HeroSection";
+import GridItems from "./components/GridItems";
 
 export default function HomePage() {
   const [loginOpen, setLoginOpen] = useState(false);

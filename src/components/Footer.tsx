@@ -1,5 +1,6 @@
 import { Typography, Link, Box, Grid } from "@mui/material";
 import { styled } from "@mui/system";
+import { ReactNode, useEffect, useState } from "react";
 
 const FooterContainer = styled(Box)({
   display: "flex",
@@ -13,7 +14,24 @@ const FooterContainer = styled(Box)({
   position: "relative",
   bottom: 0,
 });
-export default function Footer() {
+
+const Footer = () => {
+  const [footerData, setFooterData] = useState<
+    { type: string; title: string; externalUrl: string }[]
+  >([]);
+
+  useEffect(() => {
+    fetch("/api/server")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setFooterData(data))
+      .catch((error) => console.error("Fetch error:", error));
+  }, []);
+
   return (
     <FooterContainer>
       <Grid container spacing={2} justifyContent="center">
@@ -37,38 +55,23 @@ export default function Footer() {
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               Dynamic Pages
             </Typography>
-            <Link
-              display="block"
-              href="/contact"
-              color="inherit"
-              sx={{ mt: 1, textDecoration: "none" }}
-            >
-              Contact
-            </Link>
-            <Link
-              display="block"
-              href="/externalurl"
-              color="inherit"
-              sx={{ mt: 1, textDecoration: "none" }}
-            >
-              External Page
-            </Link>
-            <Link
-              display="block"
-              href="/simple"
-              color="inherit"
-              sx={{ mt: 1, textDecoration: "none" }}
-            >
-              Simple
-            </Link>
-            <Link
-              display="block"
-              href="/accordion"
-              color="inherit"
-              sx={{ mt: 1, textDecoration: "none" }}
-            >
-              FAQ
-            </Link>
+            {footerData.map((item, index) => (
+              <Link
+                key={index}
+                display="block"
+                href={
+                  item.type === "external"
+                    ? item.externalUrl
+                    : `/${(item.title || "default").toLowerCase().replace(/ /g, "-")}`
+                }
+                color="inherit"
+                sx={{ mt: 1, textDecoration: "none" }}
+                target={item.type === "external" ? "_blank" : "_self"}
+                rel="noopener noreferrer"
+              >
+                {item.title || "default"}
+              </Link>
+            ))}
           </Box>
         </Grid>
         <Grid item xs={3}>
@@ -143,4 +146,6 @@ export default function Footer() {
       </Grid>
     </FooterContainer>
   );
-}
+};
+
+export default Footer;
